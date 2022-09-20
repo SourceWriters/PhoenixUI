@@ -8,7 +8,7 @@ public abstract class AbstractPluginModule implements IPhoenixModule {
 
     private final Plugin plugin;
 
-    public AbstractPluginModule(Plugin plugin, String name) {
+    public AbstractPluginModule(Plugin plugin) {
         this.plugin = plugin;
     }
 
