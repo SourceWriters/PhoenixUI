@@ -25,7 +25,7 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
         case ENDER_CHEST:
             return 9;
         default:
-            return -1;
+            return 1;
         }
     }
 
@@ -34,6 +34,7 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
     private final String title;
 
     private final int rowSize;
+    private final int columnAmount;
 
     private final Inventory handle;
 
@@ -44,9 +45,7 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
             throw new IllegalArgumentException("InventoryType '" + type.name() + "' is not creatable!");
         }
         this.rowSize = getRowSize(type);
-        if (rowSize == -1) {
-            throw new IllegalArgumentException("Unsupported InventoryType '" + type.name() + "'!");
-        }
+        this.columnAmount = type.getDefaultSize() / rowSize;
         this.size = null;
         this.title = title;
         this.handle = Bukkit.createInventory(holder, type, BukkitColor.apply(title));
@@ -57,6 +56,7 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
         this.size = Objects.requireNonNull(size);
         this.title = title;
         this.rowSize = 9;
+        this.columnAmount = size.inventorySize() / rowSize;
         this.handle = Bukkit.createInventory(holder, size.inventorySize(), BukkitColor.apply(title));
     }
 
@@ -85,8 +85,8 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
     }
 
     @Override
-    public boolean isGridSupported() {
-        return rowSize != -1;
+    public int getColumnAmount() {
+        return columnAmount;
     }
 
     @Override
@@ -100,11 +100,11 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
     }
 
     @Override
-    public ItemStack get(int slot) {
-        if (slot < 0 || slot >= handle.getSize()) {
-            return null;
+    public ItemStack get(int index) {
+        if (index < 0 || index >= handle.getSize()) {
+            throw new IndexOutOfBoundsException(index);
         }
-        ItemStack stack = handle.getItem(slot);
+        ItemStack stack = handle.getItem(index);
         if (stack != null && stack.getType().isAir()) {
             return null;
         }
@@ -112,11 +112,11 @@ public final class PhoenixInventoryImpl implements IPhoenixInventory {
     }
 
     @Override
-    public void set(int slot, ItemStack itemStack) {
-        if (slot < 0 || slot >= handle.getSize()) {
-            return;
+    public void set(int index, ItemStack itemStack) {
+        if (index < 0 || index >= handle.getSize()) {
+            throw new IndexOutOfBoundsException(index);
         }
-        handle.setItem(slot, itemStack);
+        handle.setItem(index, itemStack);
     }
 
 }

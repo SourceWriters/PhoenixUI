@@ -11,17 +11,20 @@ public final class PhoenixMenuImpl<M extends AbstractMenu> implements IPhoenixMe
     private final M menu;
     private final AbstractSlot[] slots;
 
+    private final int rowSize;
+    private final int columnAmount;
+
     public PhoenixMenuImpl(final M menu) {
         AbstractSlot[] slots;
         if (menu.getType() == InventoryType.CHEST) {
+            this.rowSize = 9;
             slots = new AbstractSlot[menu.getSize().inventorySize()];
         } else {
-            int size = PhoenixInventoryImpl.getRowSize(menu.getType());
-            if (size == -1) {
-                throw new IllegalStateException("Unsupported InventoryType '" + menu.getType() + "'!");
-            }
-            slots = new AbstractSlot[size];
+            InventoryType type = menu.getType();
+            this.rowSize = PhoenixInventoryImpl.getRowSize(menu.getType());
+            slots = new AbstractSlot[type.getDefaultSize()];
         }
+        this.columnAmount = slots.length / rowSize;
         this.slots = slots;
         menu.onSetup(this);
         this.menu = menu;
@@ -33,12 +36,28 @@ public final class PhoenixMenuImpl<M extends AbstractMenu> implements IPhoenixMe
     }
 
     @Override
+    public int getRowSize() {
+        return rowSize;
+    }
+
+    @Override
+    public int getColumnAmount() {
+        return columnAmount;
+    }
+
+    @Override
     public boolean has(int index) {
+        if (index < 0 || index >= slots.length) {
+            throw new IndexOutOfBoundsException(index);
+        }
         return slots[index] != null;
     }
 
     @Override
     public boolean has(int index, Class<? extends AbstractSlot> slotType) {
+        if (index < 0 || index >= slots.length) {
+            throw new IndexOutOfBoundsException(index);
+        }
         AbstractSlot slot = slots[index];
         if (slot == null) {
             return false;
@@ -48,19 +67,25 @@ public final class PhoenixMenuImpl<M extends AbstractMenu> implements IPhoenixMe
 
     @Override
     public void set(int index, AbstractSlot slot) {
-        if (menu != null) {
-            return;
+        if (index < 0 || index >= slots.length) {
+            throw new IndexOutOfBoundsException(index);
         }
         slots[index] = slot;
     }
 
     @Override
     public AbstractSlot get(int index) {
+        if (index < 0 || index >= slots.length) {
+            throw new IndexOutOfBoundsException(index);
+        }
         return slots[index];
     }
 
     @Override
     public <S extends AbstractSlot> S get(int index, Class<S> slotType) {
+        if (index < 0 || index >= slots.length) {
+            throw new IndexOutOfBoundsException(index);
+        }
         AbstractSlot slot = slots[index];
         if (slot == null || !slotType.isAssignableFrom(slot.getClass())) {
             return null;

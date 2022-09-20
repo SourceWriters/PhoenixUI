@@ -16,6 +16,17 @@ public final class GridMath {
         return row * rowSize + column;
     }
 
+    public static int checkSlot(int row, int column, int rowSize, int columnAmount) throws IndexOutOfBoundsException {
+        while (row >= rowSize) {
+            column++;
+            row -= rowSize;
+        }
+        if (column >= columnAmount) {
+            throw new IndexOutOfBoundsException(columnAmount);
+        }
+        return row * rowSize + column;
+    }
+
     public static int[] fromSlot(int slot) {
         return fromSlot(slot, DEFAULT_ROW_SIZE);
     }

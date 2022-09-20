@@ -9,7 +9,7 @@ public final class VersionConstant {
     }
 
     public static final String CRAFTBUKKIT_PACKAGE = String.format("org.bukkit.craftbukkit.%s.%s",
-        Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3], "%s");
+        Bukkit.getServer().getClass().getPackage().getName().split("\\.", 4)[3], "%s");
 
     public static String craftClassPath(final String path) {
         return String.format(CRAFTBUKKIT_PACKAGE, path);

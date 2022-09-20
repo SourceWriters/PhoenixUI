@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import net.sourcewriters.minecraft.phoenixui.api.IPhoenixContext;
 import net.sourcewriters.minecraft.phoenixui.api.menu.AbstractMenuContainer;
+import net.sourcewriters.minecraft.phoenixui.api.menu.IPhoenixMenu;
 import net.sourcewriters.minecraft.phoenixui.util.Ref;
 import net.sourcewriters.minecraft.phoenixui.util.WeakRef;
 
@@ -44,7 +45,7 @@ public final class PhoenixContextImpl implements IPhoenixContext {
     }
 
     @Override
-    public Optional<AbstractMenuContainer> getMenu() {
+    public Optional<IPhoenixMenu<?>> getMenu() {
         
         return null;
     }

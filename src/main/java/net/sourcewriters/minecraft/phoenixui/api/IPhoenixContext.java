@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import net.sourcewriters.minecraft.phoenixui.api.inventory.IPhoenixInventory;
 import net.sourcewriters.minecraft.phoenixui.api.menu.AbstractMenuContainer;
+import net.sourcewriters.minecraft.phoenixui.api.menu.IPhoenixMenu;
 
 public interface IPhoenixContext {
 
@@ -35,7 +36,7 @@ public interface IPhoenixContext {
      * 
      * @return the active menu
      */
-    Optional<AbstractMenuContainer> getMenu();
+    Optional<IPhoenixMenu<?>> getMenu();
 
     /**
      * Opens a menu
