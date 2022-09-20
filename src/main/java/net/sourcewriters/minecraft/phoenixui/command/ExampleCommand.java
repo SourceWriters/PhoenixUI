@@ -24,6 +24,10 @@ public class ExampleCommand {
     @Action("test context")
     @Description("command.description.phoenixui.test.context")
     public void testContext(IPhoenixContext context, Actor<?> actor) {
+        if (context == null) {
+            // Context is null if actor is not player
+            return;
+        }
         IPhoenixUIApi api = context.getApi();
         ComponentBuilder.create()
             .add(api.getMessage("we.like.messages", Key.of("something", "SomeValue")))

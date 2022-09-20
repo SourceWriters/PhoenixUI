@@ -3,8 +3,19 @@ package net.sourcewriters.minecraft.phoenixui.api.slot;
 import org.bukkit.inventory.ItemStack;
 
 import net.sourcewriters.minecraft.phoenixui.api.IPhoenixContext;
+import net.sourcewriters.minecraft.phoenixui.api.inventory.IPhoenixInventory;
 
 public abstract class AbstractSlot {
+
+    /**
+     * Called if a inventory is being generated
+     * 
+     * @param context   the inventory context
+     * @param inventory the inventory specified in the context
+     * @param index     the slot index that the item representing this handler
+     *                      should be located at
+     */
+    public void onGenerate(final IPhoenixContext context, final IPhoenixInventory inventory, final int index) {}
 
     /**
      * Called if a player tries to pickup an item from a slot handled by this class
