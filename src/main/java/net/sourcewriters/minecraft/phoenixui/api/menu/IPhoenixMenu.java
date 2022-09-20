@@ -8,7 +8,7 @@ public interface IPhoenixMenu<M extends AbstractMenu> {
     /**
      * Gets the handling menu
      * 
-     * @return the menu
+     * @return the menu or {@code null} if menu was unloaded
      */
     M getMenu();
 

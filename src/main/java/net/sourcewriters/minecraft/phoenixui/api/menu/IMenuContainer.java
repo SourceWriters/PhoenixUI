@@ -1,15 +1,8 @@
 package net.sourcewriters.minecraft.phoenixui.api.menu;
 
-import org.bukkit.NamespacedKey;
-
 import net.sourcewriters.minecraft.phoenixui.api.IPhoenixContext;
-import net.sourcewriters.minecraft.phoenixui.util.AbstractUnique;
 
-public abstract class AbstractMenuContainer extends AbstractUnique {
-
-    public AbstractMenuContainer(NamespacedKey key) {
-        super(key);
-    }
+public interface IMenuContainer {
 
     /**
      * Get the menu selected by the specified context

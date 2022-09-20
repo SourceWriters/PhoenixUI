@@ -38,4 +38,10 @@ public final class PhoenixUIApiImpl implements IPhoenixUIApi {
         return messageManager.format(message, placeholders);
     }
 
+    @Override
+    public IPhoenixMenu<?> createMenu(Key key) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

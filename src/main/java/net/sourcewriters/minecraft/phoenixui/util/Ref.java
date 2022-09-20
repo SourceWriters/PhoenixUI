@@ -1,5 +1,7 @@
 package net.sourcewriters.minecraft.phoenixui.util;
 
+import java.util.Optional;
+
 public final class Ref<E> {
 
     private E value;
@@ -31,6 +33,13 @@ public final class Ref<E> {
 
     public boolean isEmpty() {
         return value == null;
+    }
+
+    public Optional<E> asOptional() {
+        if (value == null) {
+            return Optional.empty();
+        }
+        return Optional.of(value);
     }
 
     public static <E> Ref<E> of() {

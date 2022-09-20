@@ -1,5 +1,7 @@
 package net.sourcewriters.minecraft.phoenixui.impl;
 
+import java.lang.ref.WeakReference;
+
 import org.bukkit.event.inventory.InventoryType;
 
 import net.sourcewriters.minecraft.phoenixui.api.menu.AbstractMenu;
@@ -8,7 +10,7 @@ import net.sourcewriters.minecraft.phoenixui.api.slot.AbstractSlot;
 
 public final class PhoenixMenuImpl<M extends AbstractMenu> implements IPhoenixMenu<M> {
 
-    private final M menu;
+    private final WeakReference<M> menu;
     private final AbstractSlot[] slots;
 
     private final int rowSize;
@@ -27,12 +29,12 @@ public final class PhoenixMenuImpl<M extends AbstractMenu> implements IPhoenixMe
         this.columnAmount = slots.length / rowSize;
         this.slots = slots;
         menu.onSetup(this);
-        this.menu = menu;
+        this.menu = new WeakReference<>(menu);
     }
 
     @Override
     public M getMenu() {
-        return menu;
+        return menu.get();
     }
 
     @Override

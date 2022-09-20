@@ -2,11 +2,9 @@ package net.sourcewriters.minecraft.phoenixui.api.menu;
 
 import java.util.EnumMap;
 
-import org.bukkit.NamespacedKey;
-
 import net.sourcewriters.minecraft.phoenixui.api.IPhoenixContext;
 
-public final class EnumMenuContainer<E extends Enum<E>, M extends AbstractMenu> extends AbstractMenuContainer {
+public final class EnumMenuContainer<E extends Enum<E>, M extends AbstractMenu> implements IMenuContainer {
 
     private final EnumMap<E, IPhoenixMenu<M>> menus;
 
@@ -14,8 +12,7 @@ public final class EnumMenuContainer<E extends Enum<E>, M extends AbstractMenu> 
 
     private E defaultMenu;
 
-    public EnumMenuContainer(Class<E> enumType, NamespacedKey key) {
-        super(key);
+    public EnumMenuContainer(Class<E> enumType) {
         this.menus = new EnumMap<>(enumType);
     }
 

@@ -16,6 +16,8 @@ public final class PhoenixContextImpl implements IPhoenixContext {
 
     private final PhoenixUIApiImpl api;
 
+    private final Ref<IPhoenixMenu<?>> menu = Ref.of();
+    
     private final Ref<PhoenixInventoryImpl> inventory = Ref.of();
     private final WeakRef<Player> player = WeakRef.of();
 

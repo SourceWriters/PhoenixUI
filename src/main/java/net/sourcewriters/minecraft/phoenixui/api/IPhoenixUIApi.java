@@ -36,6 +36,16 @@ public interface IPhoenixUIApi {
     <M extends AbstractMenu> IPhoenixMenu<M> registerMenu(M menu);
 
     /**
+     * Creates a new menu instance
+     * 
+     * @param  key the key of the requested menu
+     * 
+     * @return     the menu instance or {@code null} if there is no menu with the
+     *                 specified key available
+     */
+    IPhoenixMenu<?> createMenu(Key key);
+
+    /**
      * Get a message in the default language as component
      * 
      * @param  messageId    the id of the message
